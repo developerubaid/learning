@@ -43,12 +43,19 @@ export default function TextForm(props) {
   const [text, setText] = useState("Start typing here.");
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{ color: props.mode === "light" ? "black" : "white" }}
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
             className="form-control"
             id="textInput"
+            style={{
+              backgroundColor: props.mode === "light" ? "white" : "black",
+              color: props.mode === "light" ? "black" : "white",
+            }}
             value={text}
             rows="10"
             onChange={handleOnChange}
@@ -77,7 +84,10 @@ export default function TextForm(props) {
         </button>
       </div>
 
-      <div className="container my-5">
+      <div
+        className="container my-5"
+        style={{ color: props.mode === "light" ? "black" : "white" }}
+      >
         <h3>Summery</h3>
         <p>
           {text.split(" ").length} words and {text.length} characters
