@@ -5,12 +5,14 @@ export default function TextForm(props) {
     // console.log("Upper Case Button was clicked" + text);
     let newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Text has be converted to Uppecase!", "success");
   };
 
   const handleLowClick = () => {
     // console.log("Upper Case Button was clicked" + text);
     let newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Text has be converted to Lowercase!", "success");
   };
 
   const handleTitleClick = () => {
@@ -21,18 +23,31 @@ export default function TextForm(props) {
     }
     let newText = words.join(" ");
     setText(newText);
+    props.showAlert("Text has be converted to Title Case!", "success");
   };
 
   const handleCapFirstWordClick = () => {
     // console.log("Upper Case Button was clicked" + text);
     let newText = text[0].toUpperCase() + text.substring(1);
     setText(newText);
+    props.showAlert(
+      "First Letter of sentence has been capitalized!",
+      "success"
+    );
   };
 
+  const handleCopyToClipboard = () => {
+    // console.log("Upper Case Button was clicked" + text);
+    let newText = document.getElementById("textInput");
+    newText.select();
+    navigator.clipboard.writeText(newText.value);
+    props.showAlert("Text copied!", "success");
+  };
   const handleClearClick = () => {
     // console.log("Upper Case Button was clicked" + text);
     let newText = "";
     setText(newText);
+    props.showAlert("Text has been cleared!", "success");
   };
 
   const handleOnChange = (event) => {
@@ -78,6 +93,12 @@ export default function TextForm(props) {
           onClick={handleCapFirstWordClick}
         >
           Capitalize 1st Word
+        </button>
+        <button
+          className="btn btn-primary mx-2 my-1"
+          onClick={handleCopyToClipboard}
+        >
+          Copy to Clipboard
         </button>
         <button className="btn btn-danger mx-2 my-1" onClick={handleClearClick}>
           Clear Text

@@ -5,26 +5,41 @@ import "./App.css";
 import Navbar from "./Components/Navbar";
 import TextForm from "./Components/TextForm";
 import React, { useState } from "react";
+import Alert from "./Components/Alert";
 
 function App() {
-  const [mode, switchMode] = useState("light");
+  const [alert, setAlert] = useState(null);
 
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+    setTimeout(() => {
+      setAlert(null);
+    }, 1500);
+  };
+
+  const [mode, switchMode] = useState("light");
   const toggleMode = () => {
     if (mode === "light") {
       switchMode("dark");
       document.body.style.backgroundColor = "#171717";
+      showAlert("Dark Mode has been enabled", "success");
     } else {
       switchMode("light");
       document.body.style.backgroundColor = "white";
+      showAlert("Light Mode has been enabled", "success");
     }
   };
   return (
     <>
+      <Alert alert={alert} />
       {/* //Loads Navbar from Navbar function Component */}
       <Navbar mode={mode} toggleMode={toggleMode} />
 
       <div className="container my-4">
-        <TextForm heading="MAGIXET EDITOR" mode={mode} />
+        <TextForm heading="MAGIXT EDITOR" mode={mode} showAlert={showAlert} />
       </div>
       {/* TextInput */}
     </>
