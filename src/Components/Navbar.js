@@ -9,7 +9,7 @@ export default function Navbar(props) {
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
-            Ubaid
+            MAGIXT
           </a>
           <button
             className="navbar-toggler"

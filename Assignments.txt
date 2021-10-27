@@ -1,0 +1,2 @@
+1// Correct space character error from the program as it shows 1 word while no any word there.
+2// Add themes in app

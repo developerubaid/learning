@@ -6,8 +6,18 @@ import Navbar from "./Components/Navbar";
 import TextForm from "./Components/TextForm";
 import React, { useState } from "react";
 import Alert from "./Components/Alert";
+import Toast from "./Components/Toast";
 
 function App() {
+  const [toast, setToast] = useState(null);
+
+  const showToast = (info) => {
+    setToast({ msg: info });
+    // setTimeout(() => {
+    //   setToast(null);
+    // }, 1500);
+  };
+
   const [alert, setAlert] = useState(null);
 
   const showAlert = (message, type) => {
@@ -34,12 +44,17 @@ function App() {
   };
   return (
     <>
-      <Alert alert={alert} />
       {/* //Loads Navbar from Navbar function Component */}
       <Navbar mode={mode} toggleMode={toggleMode} />
-
+      <Toast toast={toast} />
+      <Alert alert={alert} />
       <div className="container my-4">
-        <TextForm heading="MAGIXT EDITOR" mode={mode} showAlert={showAlert} />
+        <TextForm
+          heading="MAGIXT EDITOR"
+          mode={mode}
+          showAlert={showAlert}
+          showToast={showToast}
+        />
       </div>
       {/* TextInput */}
     </>

@@ -5,7 +5,8 @@ export default function TextForm(props) {
     // console.log("Upper Case Button was clicked" + text);
     let newText = text.toUpperCase();
     setText(newText);
-    props.showAlert("Text has be converted to Uppecase!", "success");
+    // props.showAlert("Text has be converted to Uppecase!", "success");
+    props.showToast("Text has be converted to Uppecase!");
   };
 
   const handleLowClick = () => {
@@ -63,7 +64,7 @@ export default function TextForm(props) {
         style={{ color: props.mode === "light" ? "black" : "white" }}
       >
         <h1>{props.heading}</h1>
-        <div className="mb-3">
+        <div className="mb-3 my-4">
           <textarea
             className="form-control"
             id="textInput"
@@ -76,31 +77,46 @@ export default function TextForm(props) {
             onChange={handleOnChange}
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleUpClick}>
+        <button
+          className="btn btn-outline-primary mx-2 my-1 rounded-pill"
+          onClick={handleUpClick}
+          disabled={text.length === 0}
+        >
           Convert to Upper Case
         </button>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleLowClick}>
+        <button
+          className="btn btn-outline-primary mx-2 my-1 rounded-pill"
+          onClick={handleLowClick}
+          disabled={text.length === 0}
+        >
           Convert to Lower Case
         </button>
         <button
-          className="btn btn-primary mx-2 my-1"
+          className="btn btn-outline-primary mx-2 my-1 rounded-pill"
           onClick={handleTitleClick}
+          disabled={text.length === 0}
         >
           Convert to Title Case
         </button>
         <button
-          className="btn btn-primary mx-2 my-1"
+          className="btn btn-outline-primary mx-2 my-1 rounded-pill"
           onClick={handleCapFirstWordClick}
+          disabled={text.length === 0}
         >
           Capitalize 1st Word
         </button>
         <button
-          className="btn btn-primary mx-2 my-1"
+          className="btn btn-outline-primary mx-2 my-1 rounded-pill"
           onClick={handleCopyToClipboard}
+          disabled={text.length === 0}
         >
           Copy to Clipboard
         </button>
-        <button className="btn btn-danger mx-2 my-1" onClick={handleClearClick}>
+        <button
+          className="btn btn-outline-danger mx-2 my-1 rounded-pill"
+          onClick={handleClearClick}
+          disabled={text.length === 0}
+        >
           Clear Text
         </button>
       </div>
@@ -111,9 +127,20 @@ export default function TextForm(props) {
       >
         <h3>Summery</h3>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length
+          }{" "}
+          words and {text.length} characters
         </p>
-        <p>{0.008 * text.split(" ").length} Minutes Read</p>
+        <p>
+          {0.008 *
+            text.split(" ").filter((element) => {
+              return element.length !== 0;
+            }).length}{" "}
+          Minutes Read
+        </p>
         <h3>Text Preview</h3>
         <p>{text}</p>
       </div>
