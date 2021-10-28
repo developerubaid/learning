@@ -5,8 +5,7 @@ export default function TextForm(props) {
     // console.log("Upper Case Button was clicked" + text);
     let newText = text.toUpperCase();
     setText(newText);
-    // props.showAlert("Text has be converted to Uppecase!", "success");
-    props.showToast("Text has be converted to Uppecase!");
+    props.showAlert("Text has be converted to Uppecase!", "success");
   };
 
   const handleLowClick = () => {
@@ -20,7 +19,8 @@ export default function TextForm(props) {
     // console.log("Upper Case Button was clicked" + text);
     let words = text.split(" ");
     for (let i = 0; i < words.length; i++) {
-      words[i] = words[i][0].toUpperCase() + words[i].substring(1);
+      words[i] =
+        words[i][0].toUpperCase() + words[i].substring(1).toLowerCase();
     }
     let newText = words.join(" ");
     setText(newText);
@@ -29,7 +29,7 @@ export default function TextForm(props) {
 
   const handleCapFirstWordClick = () => {
     // console.log("Upper Case Button was clicked" + text);
-    let newText = text[0].toUpperCase() + text.substring(1);
+    let newText = text[0].toUpperCase() + text.substring(1).toLowerCase();
     setText(newText);
     props.showAlert(
       "First Letter of sentence has been capitalized!",
@@ -38,10 +38,7 @@ export default function TextForm(props) {
   };
 
   const handleCopyToClipboard = () => {
-    // console.log("Upper Case Button was clicked" + text);
-    let newText = document.getElementById("textInput");
-    newText.select();
-    navigator.clipboard.writeText(newText.value);
+    navigator.clipboard.writeText(text);
     props.showAlert("Text copied!", "success");
   };
   const handleClearClick = () => {
@@ -125,23 +122,27 @@ export default function TextForm(props) {
         className="container my-5"
         style={{ color: props.mode === "light" ? "black" : "white" }}
       >
-        <h3>Summery</h3>
+        <h2>Summery</h2>
         <p>
-          {
-            text.split(" ").filter((element) => {
-              return element.length !== 0;
-            }).length
-          }{" "}
-          words and {text.length} characters
+          <span className="fs-3">
+            {
+              text.split(/\s+/).filter((element) => {
+                return element.length !== 0;
+              }).length
+            }{" "}
+          </span>
+          words and <span className="fs-3">{text.length}</span> characters
         </p>
         <p>
-          {0.008 *
-            text.split(" ").filter((element) => {
-              return element.length !== 0;
-            }).length}{" "}
+          <span className="fs-3">
+            {0.008 *
+              text.split(" ").filter((element) => {
+                return element.length !== 0;
+              }).length}{" "}
+          </span>
           Minutes Read
         </p>
-        <h3>Text Preview</h3>
+        <h2>Text Preview</h2>
         <p>{text}</p>
       </div>
     </>
